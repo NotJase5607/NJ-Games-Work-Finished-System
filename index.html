@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checking Your Assignments</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #f8fafd;
+    color: #202124;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 480px;
+    text-align: center;
+    padding: 35px 28px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+.logo {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 18px;
+    border-radius: 12px;
+    background: #4285f4;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    color: #5f6368;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.progress-track {
+    margin-top: 28px;
+    height: 8px;
+    width: 100%;
+    border-radius: 20px;
+    background: #e8eaed;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #4285f4;
+    border-radius: 20px;
+    transition: width 0.25s ease;
+}
+
+.status {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #5f6368;
+}
+
+.result {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    background: #fce8e6;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.result h2 {
+    margin: 0 0 10px;
+    color: #b3261e;
+    font-size: 19px;
+}
+
+.result p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.warning-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.retry {
+    display: none;
+    margin-top: 20px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 25px;
+    background: #4285f4;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.retry:hover {
+    background: #3367d6;
+}
+
+.footer {
+    margin-top: 25px;
+    color: #80868b;
+    font-size: 11px;
+}
+
+/* Invisible secret button */
+.secret-button {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 55px;
+    height: 55px;
+    z-index: 9999;
+    opacity: 0;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Secret button: click the top-right corner to open NJ Games -->
+<button
+    class="secret-button"
+    aria-label="Open another website"
+    title=""
+    onclick="window.location.href='https://sites.google.com/view/nj-games-v2/home'">
+</button>
+
+<main class="container">
+    <div class="logo">C</div>
+
+    <h1>Checking your assignments</h1>
+
+    <p class="subtitle" id="subtitle">
+        Please wait while your assignment status is being reviewed...
+    </p>
+
+    <div class="progress-track">
+        <div class="progress-bar" id="progress"></div>
+    </div>
+
+    <div class="status" id="status">
+        Connecting to assignment checker... 0%
+    </div>
+
+    <section class="result" id="result">
+        <div class="warning-icon">⚠️</div>
+        <h2>You haven't completed all of your work</h2>
+        <p>
+            Some assignments may still need your attention.
+            Please open your classroom and review your outstanding work.
+        </p>
+    </section>
+
+    <button class="retry" id="retry" onclick="startCheck()">
+        Check again
+    </button>
+
+    <div class="footer">
+        Assignment status simulation
+    </div>
+</main>
+
+<script>
+let timer;
+
+function startCheck() {
+    clearInterval(timer);
+
+    let progress = 0;
+
+    const bar = document.getElementById("progress");
+    const status = document.getElementById("status");
+    const result = document.getElementById("result");
+    const retry = document.getElementById("retry");
+    const subtitle = document.getElementById("subtitle");
+
+    result.style.display = "none";
+    retry.style.display = "none";
+    bar.style.width = "0%";
+
+    subtitle.textContent =
+        "Please wait while your assignment status is being reviewed...";
+
+    status.style.display = "block";
+    status.textContent = "Connecting to assignment checker... 0%";
+
+    timer = setInterval(function() {
+        progress += Math.floor(Math.random() * 4) + 1;
+
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(timer);
+
+            bar.style.width = "100%";
+            status.textContent = "Review complete.";
+
+            subtitle.textContent =
+                "The assignment review has finished.";
+
+            setTimeout(function() {
+                result.style.display = "block";
+                retry.style.display = "inline-block";
+                status.style.display = "none";
+            }, 700);
+
+            return;
+        }
+
+        bar.style.width = progress + "%";
+
+        if (progress < 25) {
+            status.textContent =
+                "Connecting to assignment checker... " + progress + "%";
+        } else if (progress < 50) {
+            status.textContent =
+                "Reviewing assignment status... " + progress + "%";
+        } else if (progress < 80) {
+            status.textContent =
+                "Analyzing completion status... " + progress + "%";
+        } else {
+            status.textContent =
+                "Finalizing review... " + progress + "%";
+        }
+    }, 180);
+}
+
+startCheck();
+</script>
+
+</body>
+</html>
