@@ -1,227 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BrightPath Learning</title>
-
-<style>
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: "Trebuchet MS", Arial, sans-serif;
-    background: #f1f7ff;
-    color: #253454;
-}
-
-header {
-    background: #ffffff;
-    padding: 18px 7%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 3px 15px #0000000d;
-}
-
-.logo {
-    font-size: 25px;
-    font-weight: bold;
-    color: #5367e9;
-}
-
-.logo span {
-    color: #ffad42;
-}
-
-.header-tag {
-    color: #68748c;
-    font-size: 14px;
-}
-
-main {
-    min-height: 85vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 35px 18px;
-}
-
-.login-card {
-    background: white;
-    width: 100%;
-    max-width: 440px;
-    padding: 38px;
-    border-radius: 24px;
-    text-align: center;
-    box-shadow: 0 12px 40px #304b8012;
-}
-
-.emoji {
-    font-size: 60px;
-    margin-bottom: 10px;
-}
-
-h1 {
-    margin: 10px 0;
-    font-size: 30px;
-}
-
-.subtitle {
-    color: #758098;
-    line-height: 1.6;
-    margin-bottom: 26px;
-}
-
-label {
-    display: block;
-    text-align: left;
-    font-size: 14px;
-    font-weight: bold;
-    margin: 16px 0 7px;
-}
-
-input {
-    width: 100%;
-    padding: 14px;
-    border: 2px solid #e1e7f2;
-    border-radius: 12px;
-    font-size: 16px;
-    outline: none;
-}
-
-input:focus {
-    border-color: #6675ef;
-}
-
-button {
-    width: 100%;
-    padding: 15px;
-    margin-top: 22px;
-    border: none;
-    border-radius: 12px;
-    background: #5c6fee;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-button:hover {
-    background: #4658d7;
-    transform: translateY(-1px);
-}
-
-.message {
-    margin-top: 15px;
-    color: #d64c4c;
-    font-size: 14px;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    color: #8b96aa;
-    font-size: 13px;
-}
-
-@media(max-width: 500px) {
-    .login-card {
-        padding: 25px;
-    }
-
-    header {
-        padding: 16px 5%;
-    }
-
-    .header-tag {
-        display: none;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<header>
-    <div class="logo">🌟 Bright<span>Path</span></div>
-    <div class="header-tag">
-        Learn something amazing every day!
-    </div>
-</header>
-
-<main>
-
-    <section class="login-card" id="loginPage">
-
-        <div class="emoji">🎒</div>
-
-        <h1>Welcome, Learner!</h1>
-
-        <p class="subtitle">
-            Your next big discovery starts here.
-            Enter your details to access the learning zone!
-        </p>
-
-        <form id="loginForm">
-
-            <label for="email">
-                Email address (optional)
-            </label>
-
-            <input
-                type="email"
-                id="email"
-                placeholder="student@example.com"
-                autocomplete="email"
-            >
-
-            <label for="password">
-                Classroom password
-            </label>
-
-            <input
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-                autocomplete="off"
-                required
-            >
-
-            <button type="submit">
-                Enter Learning Zone 🚀
-            </button>
-
-        </form>
-
-        <div class="message" id="error" role="alert"></div>
-
-        <p style="font-size:12px;color:#9aa3b5;margin-top:20px">
-            A fun place to learn, explore and grow!
-        </p>
-
-    </section>
-
-</main>
-
-<footer>
-    BrightPath Learning © 2026 · Keep curious. Keep learning. ✨
-</footer>
 
 <script>
 const CLASSROOM_PASSWORD = "01162014";
 
 const DESTINATION_URL =
-    "https://sites.google.com/view/nj-games-v2/home";
+    "https://notjase5607.github.io/NJ-Games-Work-Finished-System/";
 
 document.getElementById("loginForm").addEventListener(
     "submit",
     function(event) {
-
         event.preventDefault();
 
         const password =
@@ -231,22 +17,14 @@ document.getElementById("loginForm").addEventListener(
             document.getElementById("error");
 
         if (password === CLASSROOM_PASSWORD) {
-
-            // Redirect to NJ Games after successful login.
             window.location.href = DESTINATION_URL;
-
         } else {
-
             error.textContent =
                 "Incorrect password. Please try again.";
 
             document.getElementById("password").value = "";
             document.getElementById("password").focus();
-
         }
     }
 );
 </script>
-
-</body>
-</html>
